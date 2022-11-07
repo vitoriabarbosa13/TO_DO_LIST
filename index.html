@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(to right, rgb(255, 0, 128), rgb(89, 0, 255));;
+            display: flex;
+            font-family: Poppins;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+
+            border: 0;
+        }
+
+        .container {
+            background-color: #bdbeff;
+            border-radius: 5px;
+            width: 450px;
+            max-width: 100%;
+        }
+
+        .header {
+            padding: 30px 40px;
+        }
+
+        .header h2 {
+            font-weight: 600;
+            color: #440f60;
+            font-size: 30px;
+        }
+
+        .form {
+            padding: 0 40px 30px;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .form-control label {
+            display: inline-block;
+            margin-bottom: 5px;
+            color: #440f60;
+        }
+
+        .form-control input {
+            border: 2px solid #3E445B;
+            border-radius: 5px;
+            outline: 0;
+
+            display: block;
+
+            font-size: 14px;
+
+            width: 100%;
+            padding: 15px;
+        }
+
+        .form-control.success input {
+            border: 3px solid #4ECA64;
+        }
+
+        .form-control.error input {
+            border: 3px solid #DB5A5A;
+        }
+
+        .form-control.error i.img-error {
+            visibility: visible;
+        }
+
+        .form-control.error small {
+            color: #DB5A5A;
+            visibility: visible;
+        }
+
+        .form-control small {
+            position: absolute;
+            margin-top: 5px;
+            font-size: 14px;
+            color:#DB5A5A;
+
+        }
+
+        .form button {
+            background-color: #6C63FF;
+            border-radius: 5px;
+            color: #fff;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            width: 100%;
+
+            margin-top: 5px;
+
+            cursor: pointer;
+        }
+
+        .form button:hover {
+            background-color: #584ff5;
+            transition: 0.3s;
+        }
+
+        .form-control.success input {
+            border: 3px solid #4ECA64
+        }
+
+        .form-control.error input{
+        border: 3px solid #DB5A5A;
+        }
+
+        .form-control.error small{
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>
+                Cadastro
+            </h2>
+        </div>
+        <form class="form" id="form">
+            <div class="form-control">
+                <label for="username">
+                    Nome
+                </label>
+                <input type="text" id="username">
+                <small style="display: none;"> Mensagem Incorreta</small>
+            </div>
+            <div class="form-control">
+                <label for="login">
+                    Login
+                </label>
+                <input type="text" id="login">
+                <small style="display: none;"> Mensagem Incorreta</small>
+            </div>
+            <div class="form-control">
+                <label for="email">
+                    E-mail
+                </label>
+                <input type="email" id="email">
+                <small style="display: none;"> Mensagem Incorreta</small>
+            </div>
+            <div class="form-control">
+                <label for="password">
+                    Senha
+                </label>
+                <input type="password" id="password">
+                <small style="display: none;"> Mensagem Incorreta</small>
+            </div>
+            <div class="form-control">
+                <label for="passwordt">
+                    Confirme a Senha
+                </label>
+                <input type="password" id="passwordt">
+                <small style="display: none;"> Mensagem Incorreta</small>
+            </div>
+            <button type="submit"> Confirmar Cadastro</button>
+        </form>
+    </div>
+    <script>
+        function a() {
+            const username = document.getElementById("username").value;
+            console.log(username)
+        }
+        const form = document.getElementById("form")
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+
+            checkInputs()
+        })
+
+        function checkInputs() {
+            const username = document.getElementById("username");
+            const login = document.getElementById("login");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const passwordt = document.getElementById("passwordt");
+            let atr = [username, login, email, password, passwordt];
+            let check = true;
+
+            /*
+            const usernameValue = username.value.trim()
+            const loginValue = login.value.trim()
+            const emailValue = email.value.trim()
+            const passwordValue = password.value.trim()
+            const passwordtValue = passwordt.value.trim()
+            */
+
+            for (let i=0; i<atr.length; i++) {
+                if (atr[i].value === "") {
+                    check = false
+                    errorValidation(atr[i], "Preencha esse campo")
+                }
+            }
+
+            if (check) {
+                check = true;
+                if (username.value.length < 10){
+                    check = false;
+                    error(username);
+                }
+
+                if (login.value.length > 10){
+                    check = false;
+                    error(login);
+                }
+
+                let emailt = false;
+                for (let i=0; i<email.value.length; i++){
+                    if (email.value[i] == "@") {
+                        emailt = true;
+                    }
+                }
+                if (!emailt) {
+                    check = false;
+                    error(email);
+                }
+
+                if (password.value != passwordt.value) {
+                    check = false;
+                    error(password);
+                }
+
+                if (check) {
+                    save(atr);
+                }
+            }
+        }
+        function errorValidation(input, message) {
+            const formControl = input.parentElement.children[0];
+            let empty = document.createElement("p");
+            empty.appendChild(document.createTextNode(message));
+            empty.setAttribute('style', 'color: red; text-align: center; width: 360px');
+            formControl.appendChild(empty);
+        }
+        function error(input) {
+            const small = input.parentElement.children[2];
+            small.style.display = 'block'
+        }
+        function save(atr) {
+            localStorage.setItem('username', atr[0].value);
+            localStorage.setItem('login', atr[1].value);
+            localStorage.setItem('email', atr[2].value);
+            localStorage.setItem('password', atr[3].value);
+            window.location = 'index.html'
+        }
+    </script>
+</body>
+
+</html>
