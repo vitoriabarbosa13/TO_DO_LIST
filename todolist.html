@@ -1,217 +1,167 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>To Do List</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            ;
+            color: rgb(139, 36, 122);
             box-sizing: border-box;
         }
 
         body {
-            background-image: linear-gradient(to right, rgb(255, 0, 128), rgb(89, 0, 255));;
-            display: flex;
-            font-family: Poppins;
-            align-items: center;
+            background-image: linear-gradient(to right, rgb(255, 0, 128), rgb(89, 0, 255));
+        }
+
+        button {
+            background-color: #ff64d6;
+            color: rgb(25, 12, 48);
+            border: 2px solid #102f5e;
+            padding: .3rem .6rem;
+            font-size: 1rem;
+            cursor: pointer;
             justify-content: center;
-            min-height: 100vh;
-
-            border: 0;
+            align-items: center;
+            transition: .4s;
         }
 
-        .container {
+        button:hover {
+            background-color: #440f60;
+
+        }
+
+        button:hover>i {
+            color: #fff;
+
+        }
+
+        button i {
+            color: #102f5e;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        input,
+        select {
+            padding: .25rem .5rem;
+
+        }
+
+        .todo-container {
+            max-width: 450px;
+            margin: 3rem auto;
             background-color: #bdbeff;
-            border-radius: 5px;
-            width: 450px;
-            max-width: 100%;
+            padding: 1.5rem;
+            border-radius: 15px;
+
         }
 
-        .header {
-            padding: 30px 40px;
+        .todo-container header {
+            text-align: center;
+            padding: 0 1rem 1rem;
+            border-bottom: 1px solid #ccc;
         }
 
-        .header h2 {
-            font-weight: 600;
-            color: #440f60;
-            font-size: 30px;
-        }
-
-        .form {
-            padding: 0 40px 30px;
+        #todo-form p {
+            margin-bottom: .5rem;
+            font-weight: bold;
         }
 
         .form-control {
-            margin-bottom: 10px;
-            padding-bottom: 20px;
-            position: relative;
-        }
-
-        .form-control label {
-            display: inline-block;
-            margin-bottom: 5px;
-            color: #440f60;
+            display: flex;
         }
 
         .form-control input {
-            border: 2px solid #3E445B;
-            border-radius: 5px;
-            outline: 0;
-
-            display: block;
-
-            font-size: 14px;
-
-            width: 100%;
-            padding: 15px;
+            margin-right: 0.3rem;
         }
 
-        .form-control.success input {
-            border: 3px solid #4ECA64;
+        .todo {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            background-color: #395169;
+            transition: .3s;
         }
 
-        .form-control.error input {
-            border: 3px solid #DB5A5A;
-        }
-
-        .form-control.error i.img-error {
-            visibility: visible;
-        }
-
-        .form-control.error small {
-            color: #DB5A5A;
-            visibility: visible;
-        }
-
-        .form-control small {
-            visibility: hidden;
-            position: absolute;
-            margin-top: 5px;
-            font-size: 14px;
-            color:#DB5A5A;
-
-        }
-
-        .form button {
-            background-color: #6C63FF;
-            border-radius: 5px;
+        .todo h3 {
+            flex: 1;
+            font-size: .9rem;
             color: #fff;
-            padding: 15px;
-            font-size: 15px;
-            font-weight: 600;
-            width: 100%;
-
-            margin-top: 5px;
-
-            cursor: pointer;
         }
 
-        .form button:hover {
-            background-color: #584ff5;
-            transition: 0.3s;
+        .todo button {
+            margin-left: .4rem;
+
         }
 
-        .form-control.success input {
-            border: 3px solid #4ECA64
-        }
-
-        .form-control.error input{
-        border: 3px solid #DB5A5A;
-        }
-
-        .form-control.error small{
-            visibility: visible;
+        .feita {
+            text-decoration: line-through;
+            font-style: italic;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>
-                Cadastro
-            </h2>
-        </div>
-        <form class="form" id="form">
+    <div class="todo-container">
+        <header>
+            <h1> Lista de Tarefas</h1>
+        </header>
+        <form id="todo-form">
+            <p> Informe sua tarefa</p>
             <div class="form-control">
-                <label for="username">
-                    Nome
-                </label>
-                <input type="text" id="username">
-                <small> Mensagem Incorreta</small>
+                <input type="text" id="lista" placeholder="Digite nova tarefa...">
+                <button type="button" onclick="addTarefa()">
+                    <i class="fa-thin fa-plus"></i>
+                </button>
             </div>
-            <div class="form-control">
-                <label for="login">
-                    Login
-                </label>
-                <input type="text" id="login">
-                <small> Mensagem Incorreta</small>
-            </div>
-            <div class="form-control">
-                <label for="email">
-                    E-mail
-                </label>
-                <input type="email" id="email">
-                <small> Mensagem Incorreta</small>
-            </div>
-            <div class="form-control">
-                <label for="password">
-                    Senha
-                </label>
-                <input type=password" id="password">
-                <small> Mensagem Incorreta</small>
-            </div>
-            <div class="form-control">
-                <label for="passwordt">
-                    Confirme a Senha
-                </label>
-                <input type="password" id="passwordt">
-                <small> Mensagem Incorreta</small>
-            </div>
-            <button type="submit"> Confirmar Cadastro</button>
         </form>
+        <div id="todo-list">
+            <div class="todo" id="0">
+                <h3> Estou fazendo pole dance</h3>
+                <button class="finish-todo" onclick="finish(0)">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                <button class="remove-todo" onclick="remove(0)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
     </div>
+
     <script>
-        const form = document.getElementById("form")
-        const username = document.getElementById("username")
-        const login = document.getElementById("login")
-        const email = document.getElementById("email")
-        const password = document.getElementById("password")
-        const passwordt = document.getElementById("passwordt")
+        function addTarefa() {
+            var tarefa = document.getElementById('lista').value;
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault()
+            var a = document.getElementById('todo-list').childNodes.length - 2
 
-            checkInputs()
-        })
+            var insert = "<div class='todo' id='"+a+"'><h3>"+ tarefa +"</h3>"
+            insert += "<button class='finish-todo' onclick='finish("+a+")'><i class='fa-solid fa-check'></i>"
+            insert += "</button><button class='remove-todo' onclick='remove("+a+")'><i class='fa-solid fa-xmark'></i>"
+            insert += "</button></div>"
 
-        function checkInputs() {
-            const usernameValue = username.value.trim()
-            const loginValue = login.value.trim()
-            const emailValue = email.value.trim()
-            const passwordValue = password.value.trim()
-            const passwordtValue = passwordt.value.trim()
-
-            if(usernameValue --- "") {
-
-
-                errorValidation(username, "Preencha esse campo")
-            } else {
-
-            }
-        
-        }
-        function errorValidation(input, message) {
-            const formControl = input.parentElement;
-
-            formControl.className = "form control error"
+            document.getElementById('todo-list').innerHTML += insert;
         }
 
+        function finish(num) {
+            var tarefa = document.getElementById(num);
+            tarefa.children[0].classList.add('feita');
+        }
+
+        function remove(num) {
+            var tarefa = document.getElementById(num);
+            tarefa.style.display = 'none'
+        }
     </script>
 </body>
-
 </html>
