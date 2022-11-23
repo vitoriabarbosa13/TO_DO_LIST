@@ -5,8 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastros</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            ;
+            color: rgb(139, 36, 122);
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(to right, rgb(255, 0, 128), rgb(89, 0, 255));
+        }
+        
+        .dados-container {
+            max-width: 450px;
+            margin: 3rem auto;
+            background-color: #bdbeff;
+            padding: 1.5rem;
+            border-radius: 15px;
+
+        }
+
+        .dados-container header {
+            text-align: center;
+            padding: 0 1rem 0.2rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .dados-container p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .dados-container small {
+            font-size: 17px;
+            color: rgb(25, 12, 48);
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="dados-container">
+        <header>
+            <h1>Dados cadastrados</h1>
+        </header>
+        <div>
+            <p>Nome:</p>
+            <small id="username"></small>
+
+            <p>Login:</p>
+            <small id="login"></small>
+
+            <p>email:</p>
+            <small id="email"></small>
+
+            <p>Senha:</p>
+            <small id="password"></small>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('username').innerHTML = localStorage.getItem('username');
+        document.getElementById('login').innerHTML = localStorage.getItem('login');
+        document.getElementById('email').innerHTML = localStorage.getItem('email');
+        document.getElementById('password').innerHTML = localStorage.getItem('password');
+    </script>
 </body>
 </html>
